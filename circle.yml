@@ -6,7 +6,11 @@ machine:
 
 dependencies:
   override:
-    - echo 'no dependencies'
+    - echo "no dependencies"
+
+compile:
+  override:
+    - echo "no compile"
 
 test:
   override:
