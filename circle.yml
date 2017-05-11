@@ -1,0 +1,29 @@
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+
+dependencies:
+  override:
+    - echo 'no dependencies'
+
+test:
+  override:
+    - echo "no tests"
+
+deployment:
+  docker-image:
+    branch: master
+    commands:
+      # build docker image
+      - make image
+      # push to docker image registry
+      - make push
+  docker-image-branch:
+    branch: /^((?!master).)*$/  # not the master branch
+    commands:
+      # build docker image
+      - make image-branch
+      # push to docker image registry
+      - make push-branch
